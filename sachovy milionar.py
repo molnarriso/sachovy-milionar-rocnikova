@@ -33,6 +33,7 @@ class ChessMilionaireGame:
 
         self.questions = [
             {"question": "Ktorý veľmajster sa nachádza na obrázku?", "image": "kasparov.jpg", "options": ["Garry Kasparov", "Magnus Carlsen", "Viswanathan Anand", "Bobby Fischer"], "correct_option": "Garry Kasparov"},
+            {"question": "Otazka 2...", "image": "kasparov2.jpg", "options": ["Odpoved A", "Odpoved B", "Odpoved C", "Odpoved D"], "correct_option": "Odpoved A"},
             # Ďalšie otázky ...
         ]
 
