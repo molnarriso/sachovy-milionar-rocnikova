@@ -35,7 +35,7 @@ class ChessMilionaireGame:
         self.score = 0
         self.timer_start = 0
         self.answered = False
-
+        self.letters = ["A", "B", "C", "D"]
         self.create_widgets()
 
     def create_widgets(self):
@@ -55,9 +55,8 @@ class ChessMilionaireGame:
         self.option_frame.pack()
 
         self.option_buttons = []
-        letters = ["A", "B", "C", "D"]
         for i in range(4):
-            rect_button = RectangleButton(self.option_frame, letter=letters[i], option_text="", game=self, width=120, height=100, bg="white", bd=0, highlightthickness=0, relief="flat")
+            rect_button = RectangleButton(self.option_frame, letter=self.letters[i], option_text="", game=self, width=120, height=100, bg="white", bd=0, highlightthickness=0, relief="flat")
             rect_button.grid(row=i // 2, column=i % 2, pady=10, padx=10, sticky="w")
             self.option_buttons.append(rect_button)
 
@@ -98,9 +97,9 @@ class ChessMilionaireGame:
             for i in range(4):
                 self.option_buttons[i].delete("all")
                 self.option_buttons[i].create_rectangle(10, 10, 110, 90, outline="black", fill="white", width=2)
-                self.option_buttons[i].create_text(20, 50, anchor=tk.W, text=letters[i], font=("Helvetica", 18, "bold"))
+                self.option_buttons[i].create_text(20, 50, anchor=tk.W, text=self.letters[i], font=("Helvetica", 18, "bold"))
                 self.option_buttons[i].create_text(40, 50, anchor=tk.W, text=options[i], font=("Helvetica", 14))
-                self.option_buttons[i].letter = letters[i]  # Priradíme prvé písmeno možnosti k tlačidlu
+                self.option_buttons[i].letter = self.letters[i]  # Priradíme prvé písmeno možnosti k tlačidlu
 
             self.next_question_button.pack_forget()
             self.timer_start = time.time()
