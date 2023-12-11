@@ -89,6 +89,10 @@ class ChessMilionaireGame:
             question_data = self.questions[self.current_question]
             self.question_label.config(text=question_data["question"], wraplength=800)
 
+            # Reset the colors of the option buttons to their default
+            for button in self.option_buttons:
+                button.itemconfig(button.rect_id, fill="white")
+
             image_path = question_data["image"]
             pil_image = Image.open(image_path)
             pil_image = pil_image.resize((pil_image.width // 2, pil_image.height // 2))
