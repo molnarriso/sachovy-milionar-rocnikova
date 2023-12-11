@@ -19,7 +19,7 @@ class RectangleButton(tk.Canvas):
 
     def handle_click(self, event):
         if not self.game.answered:
-            self.game.answer_question(self.letter)
+            self.game.answer_question(self.index)
 
 class ChessMilionaireGame:
     def __init__(self):
@@ -108,24 +108,29 @@ class ChessMilionaireGame:
         else:
             self.show_final_score()
 
-    def answer_question(self, selected_option):
+    def answer_question(self, selected_index):
+        print(selected_index)
         if not self.answered:
             self.answered = True
             question_data = self.questions[self.current_question]
 
             correct_option_index = question_data["options"].index(question_data["correct_option"])
-            if selected_option == question_data["correct_option"][0]:
-                self.option_buttons[correct_option_index].itemconfig(1, fill="green")
+
+            # Check if the selected option is correct
+            if selected_index == correct_option_index:
+                print("correct")
+                self.option_buttons[selected_index].itemconfig(1, fill="green")
                 self.score += 1
             else:
-                selected_option_index = question_data["options"].index(selected_option)
-                self.option_buttons[selected_option_index].itemconfig(1, fill="red")
+                print("incorrect")
+                self.option_buttons[selected_index].itemconfig(1, fill="red")
                 self.option_buttons[correct_option_index].itemconfig(1, fill="green")
 
             elapsed_time = int(time.time() - self.timer_start)
             self.timer_label.config(text=f"Čas: {elapsed_time} s")
             self.current_question += 1
             self.next_question_button.pack(side=tk.TOP, pady=10)
+
 
     def update_timer(self):
         elapsed_time = int(time.time() - self.timer_start)
