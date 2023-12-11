@@ -13,9 +13,13 @@ class RectangleButton(tk.Canvas):
         self.game = game
         self.bind("<Button-1>", self.handle_click)
 
-        self.create_rectangle(10, 10, 110, 90, outline="black", fill="white", width=2)
-        self.create_text(20, 50, anchor=tk.W, text=letter, font=("Helvetica", 18, "bold"))
-        self.create_text(40, 50, anchor=tk.W, text=option_text, font=("Helvetica", 14))
+        self.rect_id = self.create_rectangle(10, 10, 110, 90, outline="black", fill="white", width=2)
+        self.letter_id = self.create_text(20, 50, anchor=tk.W, text=letter, font=("Helvetica", 18, "bold"))
+        self.option_text_id = self.create_text(40, 50, anchor=tk.W, text=option_text, font=("Helvetica", 14))
+
+    def update_option_text(self, letter, option_text):
+        self.itemconfig(self.letter_id, text=letter)
+        self.itemconfig(self.option_text_id, text=option_text)
 
     def handle_click(self, event):
         if not self.game.answered:
@@ -96,11 +100,8 @@ class ChessMilionaireGame:
             random.shuffle(options)
 
             for i in range(4):
-                self.option_buttons[i].delete("all")
-                self.option_buttons[i].create_rectangle(10, 10, 110, 90, outline="black", fill="white", width=2)
-                self.option_buttons[i].create_text(20, 50, anchor=tk.W, text=self.letters[i], font=("Helvetica", 18, "bold"))
-                self.option_buttons[i].create_text(40, 50, anchor=tk.W, text=options[i], font=("Helvetica", 14))
-                self.option_buttons[i].letter = self.letters[i]  # Priradíme prvé písmeno možnosti k tlačidlu
+                self.option_buttons[i].update_option_text(self.letters[i], options[i])
+
 
             self.next_question_button.pack_forget()
             self.timer_start = time.time()
