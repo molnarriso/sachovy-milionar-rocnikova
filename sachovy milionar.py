@@ -5,9 +5,10 @@ from tkinter import PhotoImage
 from PIL import Image, ImageTk
 
 class RectangleButton(tk.Canvas):
-    def __init__(self, master, letter, option_text, game, **kwargs):
+    def __init__(self, master, letter, option_text, index, game, **kwargs):
         tk.Canvas.__init__(self, master, **kwargs)
         self.letter = letter
+        self.index = index
         self.option_text = option_text
         self.game = game
         self.bind("<Button-1>", self.handle_click)
@@ -56,7 +57,7 @@ class ChessMilionaireGame:
 
         self.option_buttons = []
         for i in range(4):
-            rect_button = RectangleButton(self.option_frame, letter=self.letters[i], option_text="", game=self, width=120, height=100, bg="white", bd=0, highlightthickness=0, relief="flat")
+            rect_button = RectangleButton(self.option_frame, letter=self.letters[i], option_text="", index=i, game=self, width=120, height=100, bg="white", bd=0, highlightthickness=0, relief="flat")
             rect_button.grid(row=i // 2, column=i % 2, pady=10, padx=10, sticky="w")
             self.option_buttons.append(rect_button)
 
